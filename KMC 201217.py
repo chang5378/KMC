@@ -3,18 +3,21 @@
 Created on Thu Dec 17 20:45:03 2020
 
 @author: Chang
+
+Better to structure as analytical and kMC functions.  Code calls functions to create plots.  Create code block to explore questions, eg, how do results
+converge as N is increased at constant Ca0 and ki? How do results vary with ki at constant Ca0 and N?  ......
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
                                          
-Ca0 = 100           # List all initial a,b,c concentration
+Ca0 = 100    # What are the units on concentration?       # List all initial a,b,c concentration
 Cb0 = 0
 Cc0 = 0
 CT = Ca0+Cb0+Cc0    # Here is total concentration of reaction system
 
-k1 = 1.5
-k2 = 1 
+k1 = 1.5    # What are the units?
+k2 = 1.     # Ditto? 
 k = np.array([k1,k2,0])  # Here is rate constant matrix
 
 N = 1000              # Total molecules in system
@@ -67,9 +70,9 @@ plt.xlim(0,100)
 plt.ylim(0,Ca0)
 plt.show()
 
-# Analytical solution
+# Analytical solution.  # Turn into a function
 tt = np.arange(0,10,0.1)
-Ca = Ca0*np.exp(-k1*tt)
+Ca = Ca0*np.exp(-k1*tt)  #  You are using Ca as a scalar and a vector in the same code; Dangerous!
 Cb = (k1*Ca0/(k2-k1))*(np.exp(-k1*tt)-np.exp(-k2*tt))
 Cc = Ca0 - Ca - Cb
 plt.plot(tt,Ca)
